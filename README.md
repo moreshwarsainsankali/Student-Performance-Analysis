@@ -1,29 +1,36 @@
-# Welcome to your Lovable project
+# DataLens AI
 
-This project was built with [Lovable](https://lovable.dev).
+Upload a CSV and get an instant exploratory data analysis: overview, data types, missing values,
+duplicates, descriptive statistics, distributions, category counts, a correlation heatmap,
+data-quality checks, rule-based insights, and downloads (summary + cleaned CSV).
 
-## Build with Lovable
+## Two versions
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+| Version | Where | Tech |
+|---|---|---|
+| Web app (live preview) | `src/` | React + TypeScript, PapaParse, Recharts — runs fully in the browser |
+| Python version | `python/` | Streamlit, Pandas, NumPy, Plotly — run locally |
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+The hosting platform cannot run a Python server, so the live web app implements the same analysis in
+TypeScript. The Python version is provided for local use.
 
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+## Run the web app
+```
+bun install
+bun run dev
+bunx vitest run src/lib/analysis.test.ts   # tests
 ```
 
-## Built with
+## Run the Python version
+```
+cd python
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Key files
+- `src/lib/analysis.ts` — parsing, validation, statistics, correlation, insights, cleaned CSV.
+- `src/routes/index.tsx` — the page: upload, tables, charts, downloads.
+- `public/sample_students.csv` — small test dataset (contains a missing value, a duplicate and an outlier on purpose).
+- `python/app.py` — Streamlit equivalent.
