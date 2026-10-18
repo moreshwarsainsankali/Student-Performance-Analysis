@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- All CSV analysis runs client-side in `src/lib/analysis.ts` (pure functions, unit-tested); the platform cannot host Python, so `python/` is a local-only Streamlit mirror.
